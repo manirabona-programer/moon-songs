@@ -1,0 +1,30 @@
+ 1. albums:
+    user should create and CRUD albums
+    - User (relation to User model)
+    - Title
+    - Release date
+    - Description
+    - Cover image
+
+ 2. Songs:
+    users should be able to create, view, edit and delete songs.
+    Asong should have the following information:
+    - Title
+    - Length
+    - Genre (relation to Genre model)
+    - Album (relation to album model)
+
+ 3. Genres:
+    users should be able to create, view, edit and delete genres.
+    - id
+    - name
+
+ 4. Homepage:thispageshouldhave3sec􏰀ons:
+    - Albums: it should display a list of all albums with cover
+    images and 􏰀tles. When the album is clicked, it should bring
+    up all the songs within that album.
+
+    - Songs: it should display a list of all songs, regardless of the album.
+    - Genre: it should display a list of all genres available, and
+    when a genre is clicked, it should bring up a list of all songs
+    within that genre.
