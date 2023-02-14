@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\AlbumController;
-use App\Http\Controllers\Api\GenreController;
-use App\Http\Controllers\Api\SongController;
-use Illuminate\Http\Request;
+    use App\Http\Controllers\Api\AlbumController;
+    use App\Http\Controllers\Api\GenreController;
+    use App\Http\Controllers\Api\SongController;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
 
     /*
@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
     |
     */
 
-    Route::middleware('auth')->group(function() {
+    Route::middleware('auth:api')->group(function() {
         /**
          * --------------------------------
          * GENRE API ROUTES

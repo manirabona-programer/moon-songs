@@ -4,7 +4,8 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\StoreAlbumRequest;
-    use App\Models\Album;
+use App\Http\Resources\AlbumResource;
+use App\Models\Album;
 
     class AlbumController extends Controller {
         /**
@@ -13,7 +14,10 @@
          * @return \Illuminate\Http\Response
          */
         public function index() {
-            //
+            return successResponse(
+                AlbumResource::collection(user()->albums),
+                "Albums listed"
+            );
         }
 
         /**
@@ -23,7 +27,8 @@
          * @return \Illuminate\Http\Response
          */
         public function store(StoreAlbumRequest $request) {
-            //
+            $album = user()->albums()->create($request->validated());
+            return successResponse($album, "Album created");
         }
 
         /**
