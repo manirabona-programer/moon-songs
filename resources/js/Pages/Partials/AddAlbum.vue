@@ -45,7 +45,7 @@
     };
 </script>
 <template>
-    <SecondaryButton class="ml-3" @click="comfurmAlbum">Album</SecondaryButton>
+    <SecondaryButton class="ml-3" @click="comfurmAlbum">Create Album</SecondaryButton>
 
     <Modal :show="comfurmAlbumModal" @close="closeModal">
         <div class="p-6">

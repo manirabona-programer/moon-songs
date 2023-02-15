@@ -48,6 +48,6 @@
         Route::get('/songs', [SongController::class, 'index'])->name('get.songs');
         Route::get('/songs/{song}', [SongController::class, 'show'])->name('show.songs');
         Route::post('/songs', [SongController::class, 'store'])->name('store.songs');
-        Route::put('/songs/{song}', [SongController::class, 'update'])->name('update.songs');
+        Route::post('/songs/{song}', [SongController::class, 'update'])->name('update.songs');
         Route::delete('/songs/{song}', [SongController::class, 'destroy'])->name('delete.songs');
     });

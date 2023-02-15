@@ -15,6 +15,7 @@
                 $table->id();
                 $table->unsignedBigInteger('user_id');
                 $table->string('name');
+                $table->boolean('active_status')->nullable()->default(true);
                 $table->timestamps();
             });
         }

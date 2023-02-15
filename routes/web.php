@@ -17,12 +17,7 @@
     */
 
     Route::get('/', function () {
-        return Inertia::render('Welcome', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-        ]);
+        return Inertia::render('Auth/Register');
     });
 
     Route::get('/dashboard', function () {
@@ -32,6 +27,10 @@
     Route::get('/albums', function () {
         return Inertia::render('Albums');
     })->middleware(['auth', 'verified'])->name('albums');
+
+    Route::get('/songs', function () {
+        return Inertia::render('Songs');
+    })->middleware(['auth', 'verified'])->name('songs');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

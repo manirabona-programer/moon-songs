@@ -53,7 +53,8 @@
          * @return \Illuminate\Http\Response
          */
         public function update(StoreSongRequest $request, Song $song) {
-            $song = $song->update($request->validated());
+            $song->update($request->validated());
+            $song->refresh();
             return successResponse(SongResource::make($song), 'Song updated');
         }
 

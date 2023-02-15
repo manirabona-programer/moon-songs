@@ -59,7 +59,7 @@
     });
 </script>
 <template>
-    <SecondaryButton class="ml-3" @click="comfurmSongModal">Song</SecondaryButton>
+    <SecondaryButton class="ml-3" @click="comfurmSongModal">Create Song</SecondaryButton>
 
     <Modal :show="songsModal" @close="closeModal">
         <div class="p-6">

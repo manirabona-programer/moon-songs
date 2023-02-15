@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
          * The attributes that are mass assignable.
          * @var array
          */
-        protected $fillable = ['user_id', 'name'];
+        protected $fillable = ['user_id', 'name', 'active_status'];
 
         /**
          * Genre has many songs

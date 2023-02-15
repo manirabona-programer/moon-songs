@@ -1,5 +1,5 @@
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { inject, onMounted, ref, toRefs } from 'vue';
     import { useForm } from '@inertiajs/vue3';
     import { Head } from '@inertiajs/vue3';
     import Modal from '@/Components/Modal.vue';
@@ -17,6 +17,12 @@
         genre_id: 'Choose Genre',
     });
 
+    const props = defineProps({
+        songId: String
+    });
+
+    const emitter = inject('emitter');
+    const { songId } = toRefs(props)
     const songsModal = ref(false);
     const albums = ref([]);
     const genres = ref([]);
@@ -42,29 +48,35 @@
         });
     }
 
-    const saveSong = () => {
-        axios.post('/api/songs', form).then((response) => {
+    const updateSong = () => {
+        axios.post(`/api/songs/${songId.value}`, form).then((response) => {
             let data = response.data;
             emitter.emit('alert', data);
-        }).catch((error) => {
-            console.log(error);
-        });
+        }).catch();
 
         closeModal();
     };
 
     onMounted(() => {
+        axios.get(`/api/songs/${songId.value}`).then((response) => {
+            let song = response.data.data;
+                form.title = song.title;
+                form.length = song.length;
+                form.album_id = song.album.id;
+                form.genre_id = song.genre.id;
+        }).catch();
+
         getAlbums();
         getGenres();
     });
 </script>
 <template>
-    <SecondaryButton class="ml-3" @click="comfurmSongModal">Song</SecondaryButton>
+    <SecondaryButton class="ml-3" @click="comfurmSongModal">Update</SecondaryButton>
 
     <Modal :show="songsModal" @close="closeModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900">
-                Add new Song
+                Update Song
             </h2>
 
             <!-- Song title input -->
@@ -124,9 +136,9 @@
                     class="mr-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
-                    @click="saveSong"
+                    @click="updateSong"
                 >
-                    Save
+                    Save Changes
                 </PrimaryButton>
 
                 <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>

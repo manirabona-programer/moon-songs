@@ -76,12 +76,14 @@
                 )->getSecurePath();
             }
 
-            $album = $album->update([
+            $album->update([
                 'title' => $request->title,
                 'release_date' => $request->release_date,
                 'cover_image' => $imageUrl,
                 'description' => $request->description
             ]);
+
+            $album->refresh();
 
             return successResponse(AlbumResource::make($album), 'Album Updated');
         }

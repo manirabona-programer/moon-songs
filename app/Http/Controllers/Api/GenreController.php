@@ -15,7 +15,9 @@
          */
         public function index() {
             return GenreResource::collection(
-                user()->genres()->orderBy('created_at', 'desc')->get()
+                user()->genres()
+                    ->where('active_status', true)
+                    ->orderBy('created_at', 'desc')->get()
             );
         }
 
@@ -67,7 +69,8 @@
          * @return \Illuminate\Http\Response
          */
         public function destroy(Genre $genre) {
-            $genre->delete();
+            $genre->active_status = false;
+            $genre->save();
 
             return successResponse(
                 GenreResource::make($genre),

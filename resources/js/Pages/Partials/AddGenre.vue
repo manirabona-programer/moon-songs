@@ -38,7 +38,7 @@
     };
 </script>
 <template>
-    <SecondaryButton @click="openGenreModal">Genre</SecondaryButton>
+    <SecondaryButton @click="openGenreModal">Create Genre</SecondaryButton>
 
     <Modal :show="genreModal" @close="closeModal">
         <div class="p-6">
