@@ -4,7 +4,8 @@
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
-    use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
     class Genre extends Model {
         use HasFactory;
@@ -13,7 +14,7 @@
          * The attributes that are mass assignable.
          * @var array
          */
-        protected $fillable = ['name'];
+        protected $fillable = ['user_id', 'name', 'active_status'];
 
         /**
          * Genre has many songs
@@ -21,5 +22,13 @@
          */
         public function genre() :HasMany {
             return $this->hasMany(Song::class);
+        }
+
+        /**
+         * Genre Belongs to user
+         * @return HasMany
+         */
+        public function user() :BelongsTo {
+            return $this->belongsTo(User::class);
         }
     }

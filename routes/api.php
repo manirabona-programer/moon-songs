@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\AlbumController;
-use App\Http\Controllers\Api\GenreController;
-use App\Http\Controllers\Api\SongController;
-use Illuminate\Http\Request;
+    use App\Http\Controllers\Api\AlbumController;
+    use App\Http\Controllers\Api\GenreController;
+    use App\Http\Controllers\Api\SongController;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
 
     /*
@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
     |
     */
 
-    Route::middleware('auth')->group(function() {
+    Route::middleware('auth:api')->group(function() {
         /**
          * --------------------------------
          * GENRE API ROUTES
@@ -37,7 +37,7 @@ use Illuminate\Http\Request;
         Route::get('/albums', [AlbumController::class, 'index'])->name('get.albums');
         Route::get('/albums/{album}', [AlbumController::class, 'show'])->name('show.albums');
         Route::post('/albums', [AlbumController::class, 'store'])->name('store.albums');
-        Route::put('/albums/{album}', [AlbumController::class, 'update'])->name('update.albums');
+        Route::post('/albums/{album}', [AlbumController::class, 'update'])->name('update.albums');
         Route::delete('/albums/{album}', [AlbumController::class, 'destroy'])->name('delete.albums');
 
         /**
@@ -48,6 +48,6 @@ use Illuminate\Http\Request;
         Route::get('/songs', [SongController::class, 'index'])->name('get.songs');
         Route::get('/songs/{song}', [SongController::class, 'show'])->name('show.songs');
         Route::post('/songs', [SongController::class, 'store'])->name('store.songs');
-        Route::put('/songs/{song}', [SongController::class, 'update'])->name('update.songs');
+        Route::post('/songs/{song}', [SongController::class, 'update'])->name('update.songs');
         Route::delete('/songs/{song}', [SongController::class, 'destroy'])->name('delete.songs');
     });

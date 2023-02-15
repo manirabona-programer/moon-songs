@@ -4,10 +4,10 @@
 
     // use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
-    use Laravel\Sanctum\HasApiTokens;
+    use Laravel\Passport\HasApiTokens;
 
     class User extends Authenticatable {
         use HasApiTokens, HasFactory, Notifiable;
@@ -47,5 +47,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
          */
         public function albums() :HasMany {
             return $this->hasMany(Album::class);
+        }
+
+        /**
+         * User can have many genres
+         * @return HasMany
+         */
+        public function genres() :HasMany {
+            return $this->hasMany(Genre::class);
         }
     }

@@ -4,6 +4,7 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\StoreGenreRequest;
+    use App\Http\Resources\GenreResource;
     use App\Models\Genre;
 
     class GenreController extends Controller {
@@ -13,7 +14,11 @@
          * @return \Illuminate\Http\Response
          */
         public function index() {
-            //
+            return GenreResource::collection(
+                user()->genres()
+                    ->where('active_status', true)
+                    ->orderBy('created_at', 'desc')->get()
+            );
         }
 
         /**
@@ -23,7 +28,12 @@
          * @return \Illuminate\Http\Response
          */
         public function store(StoreGenreRequest $request) {
-            //
+            $genre = user()->genres()->create($request->validated());
+
+            return successResponse(
+                GenreResource::make($genre),
+                "Your Genre created and published"
+            );
         }
 
         /**
@@ -33,7 +43,7 @@
          * @return \Illuminate\Http\Response
          */
         public function show(Genre $genre) {
-            //
+            return GenreResource::make($genre);
         }
 
         /**
@@ -44,7 +54,12 @@
          * @return \Illuminate\Http\Response
          */
         public function update(StoreGenreRequest $request, Genre $genre) {
-            //
+            $genre->update($request->validated());
+
+            return successResponse(
+                GenreResource::make($genre),
+                "Your Genre updated and published"
+            );
         }
 
         /**
@@ -54,6 +69,12 @@
          * @return \Illuminate\Http\Response
          */
         public function destroy(Genre $genre) {
-            //
+            $genre->active_status = false;
+            $genre->save();
+
+            return successResponse(
+                GenreResource::make($genre),
+                "Your Genre deleted"
+            );
         }
     }
