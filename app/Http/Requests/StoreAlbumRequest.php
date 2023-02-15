@@ -14,7 +14,7 @@
             return [
                 'title' => ['required', 'string'],
                 'release_date' => ['required', 'string'],
-                'cover_image' => ['required', 'string'],
+                'cover_image' => ['required', 'image', 'mimes:png,jpg'],
                 'description' => ['required', 'string']
             ];
         }

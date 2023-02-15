@@ -30,12 +30,13 @@
     };
 
     const saveAlbum = () => {
-        axios.post('/api/albums', {
-            title: form.title,
-            release_date: form.date,
-            cover_image: form.cover,
-            description: form.description
-        }).then((response) => {
+        let formData = new FormData;
+            formData.append('title', form.title);
+            formData.append('release_date', form.date);
+            formData.append('cover_image', form.cover);
+            formData.append('description', form.description);
+
+        axios.post('/api/albums', formData).then((response) => {
             let data = response.data;
             emitter.emit('alert', data);
         });
@@ -71,21 +72,21 @@
                     id="date"
                     ref="dateInput"
                     v-model="form.date"
-                    type="text"
+                    type="date"
                     class="mt-1 block w-3/4"
                     placeholder="Release date"
                 />
             </div>
             <div class="mt-6">
-                <InputLabel for="description" value="cover" class="sr-only" />
+                <InputLabel for="Choose Cover" value="cover" class="sr-only" />
 
                 <FileInput
-                    id="description"
-                    ref="descriptionInput"
-                    v-model="form.cover"
+                    id="cover"
+                    ref="coverInput"
+                    @input="form.cover = $event.target.files[0]"
                     type="file"
                     class="mt-1 block w-3/4"
-                    placeholder="Description"
+                    placeholder="Choose Cover"
                 />
             </div>
 

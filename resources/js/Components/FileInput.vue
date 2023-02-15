@@ -18,7 +18,7 @@ defineExpose({ focus: () => input.value.focus() });
 
 <template>
     <input
-        class="rounded-md shadow-sm block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none "
+        class="rounded-md shadow-sm block w-3/4 text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none "
         aria-describedby="file_input_help"
         type="file"
         :value="modelValue"

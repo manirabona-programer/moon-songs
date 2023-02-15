@@ -15,7 +15,7 @@
          */
         public function index() {
             return GenreResource::collection(
-                Genre::where('active_status', true)->orderBy('created_at', 'desc')->get()
+                user()->genres()->orderBy('created_at', 'desc')->get()
             );
         }
 
@@ -26,7 +26,7 @@
          * @return \Illuminate\Http\Response
          */
         public function store(StoreGenreRequest $request) {
-            $genre = Genre::create($request->validated());
+            $genre = user()->genres()->create($request->validated());
 
             return successResponse(
                 GenreResource::make($genre),

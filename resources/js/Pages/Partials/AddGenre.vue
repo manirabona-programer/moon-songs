@@ -31,6 +31,7 @@
         axios.post('/api/genres', { name: form.name }).then((response) => {
             let data = response.data;
             emitter.emit('alert', data);
+            emitter.emit('genres');
         });
 
         closeModal();

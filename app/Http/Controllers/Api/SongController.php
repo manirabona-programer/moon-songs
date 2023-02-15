@@ -4,6 +4,7 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\StoreSongRequest;
+    use App\Http\Resources\SongResource;
     use App\Models\Song;
 
     class SongController extends Controller {
@@ -13,7 +14,8 @@
          * @return \Illuminate\Http\Response
          */
         public function index() {
-            //
+            $songs = user()->albums->songs;
+            return SongResource::collection($songs);
         }
 
         /**
@@ -23,7 +25,14 @@
          * @return \Illuminate\Http\Response
          */
         public function store(StoreSongRequest $request) {
-            //
+            $song = user()->albums()->where('id', $request->album_id)
+                        ->first()->songs()->create([
+                            'genre_id' => $request->genre_id,
+                            'title' => $request->title,
+                            'length' => $request->length
+                        ]);
+
+            return successResponse(SongResource::make($song), "Song created");
         }
 
         /**
@@ -33,7 +42,7 @@
          * @return \Illuminate\Http\Response
          */
         public function show(Song $song) {
-            //
+            return successResponse(SongResource::make($song), "Song Listed");
         }
 
         /**
@@ -44,7 +53,8 @@
          * @return \Illuminate\Http\Response
          */
         public function update(StoreSongRequest $request, Song $song) {
-            //
+            $song = $song->update($request->validated());
+            return successResponse(SongResource::make($song), 'Song updated');
         }
 
         /**
@@ -54,6 +64,7 @@
          * @return \Illuminate\Http\Response
          */
         public function destroy(Song $song) {
-            //
+            $song->delete();
+            return successResponse(null, 'Song deleted');
         }
     }

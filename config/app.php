@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Passport\PassportServiceProvider::class,
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
 
         /*
          * Application Service Providers...

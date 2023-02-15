@@ -4,8 +4,9 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\StoreAlbumRequest;
-use App\Http\Resources\AlbumResource;
-use App\Models\Album;
+    use App\Http\Resources\AlbumResource;
+    use App\Models\Album;
+    use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
     class AlbumController extends Controller {
         /**
@@ -27,8 +28,19 @@ use App\Models\Album;
          * @return \Illuminate\Http\Response
          */
         public function store(StoreAlbumRequest $request) {
-            $album = user()->albums()->create($request->validated());
-            return successResponse($album, "Album created");
+            $imageUrl = Cloudinary::uploadFile(
+                $request->file('cover_image')->getRealPath(),
+                $options = array('public_id' => 'moon-songs/' . $request->cover_image)
+            )->getSecurePath();
+
+            $album = user()->albums()->create([
+                'title' => $request->title,
+                'release_date' => $request->release_date,
+                'cover_image' => $imageUrl,
+                'description' => $request->description
+            ]);
+
+            return successResponse(AlbumResource::make($album), "Album created");
         }
 
         /**
@@ -38,7 +50,7 @@ use App\Models\Album;
          * @return \Illuminate\Http\Response
          */
         public function show(Album $album) {
-            //
+            return successResponse(AlbumResource::make($album), 'Album listed');
         }
 
         /**
@@ -49,7 +61,8 @@ use App\Models\Album;
          * @return \Illuminate\Http\Response
          */
         public function update(StoreAlbumRequest $request, Album $album) {
-            //
+            $album = $album->update($request->validated());
+            return successResponse(AlbumResource::make($album), 'Album Updated');
         }
 
         /**
@@ -59,6 +72,7 @@ use App\Models\Album;
          * @return \Illuminate\Http\Response
          */
         public function destroy(Album $album) {
-            //
+            $album->delete();
+            return successResponse(null, 'album Deleted');
         }
     }

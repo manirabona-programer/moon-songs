@@ -48,4 +48,12 @@
         public function albums() :HasMany {
             return $this->hasMany(Album::class);
         }
+
+        /**
+         * User can have many genres
+         * @return HasMany
+         */
+        public function genres() :HasMany {
+            return $this->hasMany(Genre::class);
+        }
     }

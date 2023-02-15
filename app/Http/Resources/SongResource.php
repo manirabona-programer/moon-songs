@@ -4,7 +4,7 @@
 
     use Illuminate\Http\Resources\Json\JsonResource;
 
-    class AlbumResource extends JsonResource {
+    class SongResource extends JsonResource {
         /**
          * Transform the resource into an array.
          *
@@ -15,11 +15,9 @@
             return [
                 'id' => $this->id,
                 'title' => $this->title,
-                'release_date' => $this->release_date,
-                'description' => $this->description,
-                'cover_image' => $this->cover_image,
-                'songs' => SongResource::collection($this->songs),
-                'created_at' => $this->created_at
+                'length' => $this->length,
+                'album' => $this->album,
+                'genre' => $this->genre
             ];
         }
     }
