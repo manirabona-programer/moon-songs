@@ -10,6 +10,7 @@ To setup the project you must have the compose already installed and configured 
 - ** npm install && npm run dev **
 - ** php artisan migrate **
 - ** php artisan optimize **
+- ** php artisan test ** to run all feature-tests
 
 ## Security Vulnerabilities
 
