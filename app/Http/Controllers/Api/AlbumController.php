@@ -9,6 +9,8 @@
     use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
     class AlbumController extends Controller {
+        protected $defaulImage = "https://images.unsplash.com/photo-1619983081593-e2ba5b543168?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+
         /**
          * Display a listing of the resource.
          *
@@ -28,10 +30,14 @@
          * @return \Illuminate\Http\Response
          */
         public function store(StoreAlbumRequest $request) {
-            $imageUrl = Cloudinary::uploadFile(
-                $request->file('cover_image')->getRealPath(),
-                $options = array('public_id' => 'moon-songs/' . $request->cover_image)
-            )->getSecurePath();
+            $imageUrl = $this->defaulImage;
+
+            if($request->hasFile('cover_image')){
+                $imageUrl = Cloudinary::uploadFile(
+                    $request->file('cover_image')->getRealPath(),
+                    $options = array('public_id' => 'moon-songs/' . $request->cover_image)
+                )->getSecurePath();
+            }
 
             $album = user()->albums()->create([
                 'title' => $request->title,
@@ -61,7 +67,22 @@
          * @return \Illuminate\Http\Response
          */
         public function update(StoreAlbumRequest $request, Album $album) {
-            $album = $album->update($request->validated());
+            $imageUrl = $album->cover_image;
+
+            if($request->hasFile('cover_image')){
+                $imageUrl = Cloudinary::uploadFile(
+                    $request->file('cover_image')->getRealPath(),
+                    $options = array('public_id' => 'moon-songs/' . $request->cover_image)
+                )->getSecurePath();
+            }
+
+            $album = $album->update([
+                'title' => $request->title,
+                'release_date' => $request->release_date,
+                'cover_image' => $imageUrl,
+                'description' => $request->description
+            ]);
+
             return successResponse(AlbumResource::make($album), 'Album Updated');
         }
 

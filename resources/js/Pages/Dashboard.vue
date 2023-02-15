@@ -4,6 +4,7 @@
     import AddAlbum from "@/Pages/Partials/AddAlbum.vue";
     import AddSong from "@/Pages/Partials/AddSong.vue";
     import Alert from "@/Components/Alert.vue";
+    import DeleteAlert from "@/Components/DeleteAlert.vue";
     import { ref, unref } from "vue";
     import Genres from "@/Pages/Partials/Genres.vue";
     import AlbumsWithSongs from "./Partials/AlbumsWithSongs.vue";
@@ -32,7 +33,10 @@
             <Genres />
         </div>
 
-        <Alert />
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
+            <Alert />
+            <DeleteAlert />
+        </div>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-4 gap-4 mt-5">
             <AlbumsWithSongs />

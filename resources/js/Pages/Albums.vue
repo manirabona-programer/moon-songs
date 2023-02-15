@@ -5,6 +5,7 @@
     import AddSong from "@/Pages/Partials/AddSong.vue";
     import Albums from "@/Pages/Partials/Albums.vue";
     import Alert from "@/Components/Alert.vue";
+    import DeleteAlert from "@/Components/DeleteAlert.vue";
     import { ref, unref } from "vue";
     import Genres from "@/Pages/Partials/Genres.vue";
 </script>
@@ -30,6 +31,11 @@
         <!-- Genres -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
             <Genres />
+        </div>
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
+            <Alert />
+            <DeleteAlert />
         </div>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-4 gap-4 mt-5">

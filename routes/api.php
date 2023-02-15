@@ -37,7 +37,7 @@
         Route::get('/albums', [AlbumController::class, 'index'])->name('get.albums');
         Route::get('/albums/{album}', [AlbumController::class, 'show'])->name('show.albums');
         Route::post('/albums', [AlbumController::class, 'store'])->name('store.albums');
-        Route::put('/albums/{album}', [AlbumController::class, 'update'])->name('update.albums');
+        Route::post('/albums/{album}', [AlbumController::class, 'update'])->name('update.albums');
         Route::delete('/albums/{album}', [AlbumController::class, 'destroy'])->name('delete.albums');
 
         /**

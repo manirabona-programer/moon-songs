@@ -1,6 +1,7 @@
 <script setup>
     import { ref, unref } from "vue";
     import axios from "axios";
+    import DeleteOrUpdate from "@/Components/DeleteOrUpdate.vue";
 
     const albums = ref([]);
 
@@ -19,6 +20,7 @@
                 <div class="text-white pt-12">
                     <h3 class="font-bold">Album</h3>
                     <div class="text-sm opacity-60">{{ album.title }}</div>
+                    <DeleteOrUpdate :albumId="album.id" :albumName="album.title" />
                 </div>
             </div>
         </div>
